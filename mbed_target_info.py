@@ -28,6 +28,7 @@ def main():
                
         device_data_entry["name"] = target.name
         
+        device_data_description_array = []
         device_data_description = {}
         
         device_data_description["ver"] = "5.9.1"
@@ -39,9 +40,13 @@ def main():
                 if feature == template_feature:
                     device_has_template[feature] = 'YES' 
 
-        device_data_description["target_data"] = json.dumps(device_has_template)     
-
-        device_data_entry["description"] = device_data_description
+        device_data_description["target_data"] = device_has_template
+    
+           #I'm realizing that it is not practical for there to be an array of 'description' data 
+           #   that includes data from multiple versions of mbed os, but that is the way it is now, so going with it.
+        device_data_description_array.append(device_data_description)
+        
+        device_data_entry["description"] = device_data_description_array
 
         device_data_array.append(device_data_entry)
 
